@@ -1,0 +1,44 @@
+listings = LOAD '/mydata/class2/listings.txt'
+as
+(listing_id:int, date_listed:chararray, list_price:float,
+sq_feet:int, address:chararray, town:chararray);
+
+listings = FOREACH listings GENERATE listing_id, ToDate(date_listed, 'MM/dd/YYYY') AS date_listed, list_price, sq_feet, address, town;
+
+bytown = GROUP listings BY town;
+DESCRIBE bytown;
+DUMP bytown;
+
+bytown = GROUP listings BY town;
+DESCRIBE bytown;
+--DUMP bytown;
+
+avgprices = FOREACH bytown GENERATE group, AVG(listings.list_price);
+DUMP avgprices;
+
+high_priced = FILTER bytown
+                BY AVG(listings.list_price) >= 200000.0;
+DESCRIBE high_priced;
+
+avgprices = FOREACH high_priced
+                GENERATE group, AVG(listings.list_price) as avgpr;
+avgprices = ORDER avgprices BY avgpr DESC;
+DUMP avgprices;
+
+
+/*
+bytown: 
+    {
+    group: chararray,
+    listings: 
+        {(
+        listing_id: int,
+        date_listed: datetime,
+        list_price: float,
+        sq_feet: int,
+        address: chararray,
+        town: chararray
+        )}
+    }
+*/
+
