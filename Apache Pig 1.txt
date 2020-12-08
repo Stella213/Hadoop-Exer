@@ -1,0 +1,45 @@
+#Slide 11
+sqoop import \
+--connect jdbc:mysql://localhost/sakila \
+--username ubuntu --password training \
+--target-dir /user/myfilm \
+--table film \
+--columns 'film_id, title, rental_rate'
+
+#After the above code runs:
+hadoop fs -ls /user
+
+#Slide 12
+hadoop fs -cat /user/myfilm/part-m-00001 | head -5
+
+#Slide 13
+#code available in file "films.pig"
+
+#Slide 14
+pig films.pig
+hadoop fs -ls /user
+
+#Slide 15
+hadoop fs -cat /user/myfilm/part-m-00001 | head -5
+
+#Slide 19
+hadoop fs -mkdir /mydata
+hadoop fs -mkdir /mydata/class2
+
+hadoop fs -put realestate.txt /mydata/class2
+
+#Slide 20
+vi realestate.pig
+
+#Slide 22
+pig realestate.pig
+
+#Slide 42
+hadoop fs -put listings.txt /mydata/class2
+
+#Slide 52
+pig -x local realestate_local.pig
+
+
+
+

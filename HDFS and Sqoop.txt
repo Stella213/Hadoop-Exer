@@ -1,0 +1,164 @@
+Lines starting with '#' are comments, not to be typed in prompt
+#Slide 27:
+mkdir mydata
+cd mydata
+mkdir class1
+mkdir class2
+mkdir class3
+mkdir class4
+mkdir class5
+mkdir class6
+mkdir class7
+mkdir class8
+mkdir class9
+mkdir class10
+
+#Slide 28:
+ls
+
+#Slide 29:
+ls -l
+
+#Slide 30:
+pwd
+
+#Slide 31:
+cd mydata
+pwd
+
+#Slide 32:
+cd ..
+pwd
+
+#Slide 33:
+clear
+
+#Slide 34:
+cd mydata/class2
+pwd
+cd ../..
+pwd
+
+#Slide 35:
+mkdir test
+ls
+
+#Slide 36:
+cd test
+mkdir test1
+ls
+mkdir test2
+mkdir test3
+
+#Slide 37:
+rmdir test2
+ls
+touch test.txt
+ls
+
+#Slide 38:
+rm test.txt
+ls
+touch test71.txt test72.txt test73.txt
+ls
+
+#Slide 39:
+rm test7*
+ls
+
+#Slide 40:
+hadoop fs -ls /
+hdfs dfs -ls /
+
+#Slide 41:
+hadoop fs -ls
+hadoop fs -ls /user/ubuntu
+
+#Slide 43:
+mysql -u ubuntu -p
+#password: training
+
+#Slide 44:
+show databases;
+use sakila;
+show tables;
+
+#Slide 45:
+sqoop import \
+--connect jdbc:mysql://localhost/sakila \
+--username ubuntu --password training \
+--warehouse-dir /userdata \
+--table actor
+
+hadoop fs -ls /userdata
+
+#Slide 46:
+sqoop import \
+--connect jdbc:mysql://localhost/sakila \
+--username ubuntu --password training \
+--target-dir /user/myfilms \
+--table film
+
+hadoop fs -ls /user
+
+#Slide 47:
+sqoop import \
+--connect jdbc:mysql://localhost/sakila \
+--username ubuntu --password training \
+--warehouse-dir /userdata \
+--table city \
+--columns 'city_id, city'
+
+#Slide 48:
+sqoop import \
+--connect jdbc:mysql://localhost/sakila \
+--username ubuntu --password training \
+--warehouse-dir /userdata \
+--table rental \
+--where 'inventory_id <= 10'
+
+#Slide 49:
+sqoop import \
+--connect jdbc:mysql://localhost/sakila \
+--username ubuntu --password training \
+--warehouse-dir /userdata \
+--table rental \
+--where 'inventory_id > 10 and inventory_id < 20' \
+--incremental append \
+--check-column rental_id
+
+#Slide 51:
+CREATE TABLE new_rental SELECT * FROM rental LIMIT 0;
+
+sqoop export \
+--connect jdbc:mysql://localhost/sakila \
+--username ubuntu --password training \
+--export-dir /userdata/rental \
+--table new_rental
+
+#Slide 54:
+hadoop fs -mkdir userdata
+hadoop fs -ls /
+cd
+cd data
+ls
+hadoop fs -put products.txt /userdata
+hadoop fs -ls /userdata
+
+#Slide 55:
+hadoop fs -cat /userdata/products.txt
+hadoop fs -get /userdata/products.txt p1.txt
+
+#Slide 57:
+touch test.txt
+hadoop fs -put test.txt
+hadoop fs -ls
+hadoop fs -ls /user/ubuntu
+hadoop fs -rm test.txt
+hadoop fs -ls /user/ubuntu
+
+#Slide 58:
+hadoop fs -ls /
+hadoop fs -mkdir /userdata/sales
+hadoop fs -rm /userdata/products.txt
+hadoop fs -rmdir /userdata/sales

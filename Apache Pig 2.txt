@@ -1,0 +1,69 @@
+#Slide 3
+cd
+cd data/class3
+ls -l
+
+#Slide 4
+vi listings.txt
+hadoop fs -mkdir /mydata/class3
+hadoop fs -put listings.txt /mydata/class3
+
+#Slide 5
+vi flatten.pig
+
+#Slide 6
+pig flatten.pig
+
+#Slide 8
+vi homes_nested_foreach.pig
+
+#Slide 10
+pig homes_nested_foreach.pig
+
+#Slide 12
+more realtors_listings.txt
+
+#Slide 13
+hadoop fs -put realtors_listings.txt /mydata/class3
+hadoop fs -ls /mydata/class3/real*
+vi split_listings.pig
+
+#Slide 15
+pig split_listings.pig
+
+#Slide 16
+hadoop fs -ls /mydata/class3/homes
+hadoop fs -ls /mydata/class3/realtors
+
+#optional:
+hadoop fs -rm -r /mydata/class3/homes
+hadoop fs -rm -r /mydata/class3/realtors
+#If you run the above commands, remember to run "pig split_listings.pig" again
+
+#Slide 17
+vi join_listings.pig
+
+#Slide 18
+pig join_listings.pig
+
+#Slide 19
+vi row_listings.pig
+
+#Slide 20
+pig row_listings.pig
+
+#Slide 21
+hadoop fs -ls /mydata/class3/list_*
+hadoop fs -cat /mydata/class3/list_3/part* | head -5
+
+#Slide 22
+vi rowunion_listings.pig
+
+#Slide 23
+pig rowunion_listings.pig
+
+
+
+
+
+
